@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Shared by registration and the health profile screen. Only information useful in an emergency. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
+    <TextView style="@style/H2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="20dp" android:text="Emergency contact"/>
+    <com.google.android.material.textfield.TextInputLayout android:id="@+id/contactNameLayout" style="@style/Field" android:hint="Contact name">
+        <com.google.android.material.textfield.TextInputEditText android:id="@+id/contactName" android:layout_width="match_parent" android:layout_height="wrap_content" android:inputType="textPersonName|textCapWords"/>
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout style="@style/Field" android:hint="Relationship (e.g. sister, partner)">
+        <com.google.android.material.textfield.TextInputEditText android:id="@+id/contactRelationship" android:layout_width="match_parent" android:layout_height="wrap_content" android:inputType="textCapSentences"/>
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout android:id="@+id/contactPhoneLayout" style="@style/Field" android:hint="Contact phone number">
+        <com.google.android.material.textfield.TextInputEditText android:id="@+id/contactPhone" android:layout_width="match_parent" android:layout_height="wrap_content" android:inputType="phone"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView style="@style/H2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="20dp" android:text="Health information"/>
+    <TextView style="@style/Muted" android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:text="Shared with your company only during a confirmed emergency, and only if you consent below. It is never put in the SMS."/>
+    <com.google.android.material.textfield.TextInputLayout style="@style/Field" android:hint="Age">
+        <com.google.android.material.textfield.TextInputEditText android:id="@+id/age" android:layout_width="match_parent" android:layout_height="wrap_content" android:inputType="number" android:maxLength="3"/>
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp" android:hint="Blood type">
+        <AutoCompleteTextView android:id="@+id/bloodType" android:layout_width="match_parent" android:layout_height="wrap_content" android:inputType="none" android:minHeight="56dp"/>
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout style="@style/Field" android:hint="Allergies">
+        <com.google.android.material.textfield.TextInputEditText android:id="@+id/allergies" android:layout_width="match_parent" android:layout_height="wrap_content" android:inputType="textCapSentences|textMultiLine"/>
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout style="@style/Field" android:hint="Chronic medical conditions">
+        <com.google.android.material.textfield.TextInputEditText android:id="@+id/conditions" android:layout_width="match_parent" android:layout_height="wrap_content" android:inputType="textCapSentences|textMultiLine"/>
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout style="@style/Field" android:hint="Important medication">
+        <com.google.android.material.textfield.TextInputEditText android:id="@+id/medication" android:layout_width="match_parent" android:layout_height="wrap_content" android:inputType="textCapSentences|textMultiLine"/>
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout style="@style/Field" android:hint="Other medical notes for emergency treatment (optional)">
+        <com.google.android.material.textfield.TextInputEditText android:id="@+id/medicalNotes" android:layout_width="match_parent" android:layout_height="wrap_content" android:inputType="textCapSentences|textMultiLine"/>
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.checkbox.MaterialCheckBox android:id="@+id/consent" android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:layout_marginTop="16dp" android:minHeight="56dp" android:textSize="15sp"
+        android:text="I consent to RideGuard sharing my emergency contact and the health information above with my company and emergency contact when an emergency is confirmed."/>
+</LinearLayout>

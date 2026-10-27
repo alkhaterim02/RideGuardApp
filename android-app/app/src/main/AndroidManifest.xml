@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+
+    <application
+        android:name=".RideGuardApp"
+        android:label="@string/app_name"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher"
+        android:theme="@style/Theme.RideGuard"
+        android:supportsRtl="true">
+
+        <activity android:name=".ui.WelcomeActivity" android:exported="true" android:theme="@style/Theme.RideGuard.NoBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.LoginActivity" android:exported="false" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.RegisterActivity" android:exported="false" android:label="Rider registration" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.RiderHomeActivity" android:exported="false" android:label="RideGuard"/>
+        <activity android:name=".ui.HealthProfileActivity" android:exported="false" android:label="Health and emergency contact" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.CountdownActivity" android:exported="false" android:theme="@style/Theme.RideGuard.NoBar"
+            android:showWhenLocked="true" android:turnScreenOn="true" android:launchMode="singleTop"/>
+        <activity android:name=".ui.EmergencyActivity" android:exported="false" android:label="Emergency"/>
+        <activity android:name=".ui.IncidentListActivity" android:exported="false"/>
+        <activity android:name=".ui.IncidentDetailActivity" android:exported="false" android:label="Incident"/>
+        <activity android:name=".ui.VideoActivity" android:exported="false" android:theme="@style/Theme.RideGuard.NoBar"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"/>
+        <activity android:name=".ui.CompanyHomeActivity" android:exported="false" android:label="Company dashboard"/>
+        <activity android:name=".ui.RidersActivity" android:exported="false" android:label="Riders"/>
+
+        <service android:name=".notify.PushService" android:exported="false">
+            <intent-filter><action android:name="com.google.firebase.MESSAGING_EVENT"/></intent-filter>
+        </service>
+        <meta-data android:name="com.google.firebase.messaging.default_notification_channel_id" android:value="emergencies"/>
+    </application>
+</manifest>

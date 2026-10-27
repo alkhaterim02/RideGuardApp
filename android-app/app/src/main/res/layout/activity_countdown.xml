@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical" android:gravity="center_horizontal" android:padding="24dp" android:background="@color/navy" android:keepScreenOn="true">
+    <TextView android:id="@+id/simLabel" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@color/amberBright"
+        android:textColor="#3B2600" android:textStyle="bold" android:padding="6dp" android:text="TEST – SIMULATED ACCIDENT" android:visibility="gone"/>
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="⚠ Possible accident detected" android:textColor="@color/white"
+        android:textSize="28sp" android:textStyle="bold" android:gravity="center" android:layout_marginTop="16dp"/>
+    <TextView android:id="@+id/seconds" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="20" android:textColor="@color/amberBright"
+        android:textSize="140sp" android:textStyle="bold" android:includeFontPadding="false" android:accessibilityLiveRegion="polite"/>
+    <TextView android:id="@+id/message" android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center" android:textColor="#E8EDF5" android:textSize="19sp"
+        android:text="Emergency alert will be sent if you do not cancel."/>
+    <TextView android:id="@+id/locationStatus" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="12dp"
+        android:textColor="#B8C4DA" android:textSize="15sp"/>
+    <View android:layout_width="0dp" android:layout_height="0dp" android:layout_weight="1"/>
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center" android:textColor="#B8C4DA" android:textSize="15sp"
+        android:text="You can also press the physical CANCEL button on your vest."/>
+    <com.google.android.material.button.MaterialButton android:id="@+id/cancelBtn" style="@style/BigButton" android:minHeight="150dp" android:textSize="30sp"
+        android:text="CANCEL ALERT\nI am OK" android:backgroundTint="#E8590C" android:textColor="@color/white" android:contentDescription="Cancel alert, I am OK"/>
+</LinearLayout>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.RideGuard" parent="Theme.Material3.Light">
+        <item name="colorPrimary">@color/navy</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/red</item>
+        <item name="android:colorBackground">@color/paper</item>
+        <item name="android:windowBackground">@color/paper</item>
+        <item name="android:statusBarColor">@color/navy</item>
+        <item name="actionBarTheme">@style/ThemeOverlay.RideGuard.ActionBar</item>
+        <item name="actionBarStyle">@style/RgActionBar</item>
+        <item name="materialButtonStyle">@style/RgButton</item>
+    </style>
+    <style name="Theme.RideGuard.NoBar" parent="Theme.RideGuard">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="ThemeOverlay.RideGuard.ActionBar" parent="ThemeOverlay.Material3.Dark.ActionBar">
+        <item name="colorSurface">@color/navy</item>
+        <item name="colorOnSurface">@color/white</item>
+    </style>
+
+    <style name="RgActionBar" parent="Widget.Material3.ActionBar.Solid">
+        <item name="background">@color/navy</item>
+    </style>
+
+    <style name="RgButton" parent="Widget.Material3.Button">
+        <item name="android:minHeight">56dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="cornerRadius">10dp</item>
+    </style>
+    <!-- Glove-friendly: tall targets with large text. -->
+    <style name="BigButton" parent="RgButton">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">68dp</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:layout_marginTop">12dp</item>
+    </style>
+    <style name="BigButton.Outlined" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">60dp</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="cornerRadius">10dp</item>
+    </style>
+    <style name="Banner">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/amberBg</item>
+        <item name="android:textColor">@color/amber</item>
+        <item name="android:padding">12dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+    <style name="Card">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">12dp</item>
+        <item name="cardCornerRadius">12dp</item>
+        <item name="cardElevation">1dp</item>
+        <item name="strokeColor">@color/line</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="cardBackgroundColor">@color/white</item>
+        <item name="contentPadding">16dp</item>
+    </style>
+    <style name="H1"><item name="android:textSize">26sp</item><item name="android:textStyle">bold</item><item name="android:textColor">@color/ink</item></style>
+    <style name="H2"><item name="android:textSize">18sp</item><item name="android:textStyle">bold</item><item name="android:textColor">@color/ink</item></style>
+    <style name="Body"><item name="android:textSize">16sp</item><item name="android:textColor">@color/ink</item><item name="android:lineSpacingExtra">3dp</item></style>
+    <style name="Muted"><item name="android:textSize">14sp</item><item name="android:textColor">@color/muted</item></style>
+    <style name="Field" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">10dp</item>
+    </style>
+</resources>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent" android:background="#000000">
+    <androidx.media3.ui.PlayerView android:id="@+id/player" android:layout_width="match_parent" android:layout_height="match_parent"
+        app:show_buffering="when_playing" app:use_controller="true"/>
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical"
+        android:background="#99000000" android:padding="8dp">
+        <com.google.android.material.button.MaterialButton android:id="@+id/backBtn" style="@style/Widget.Material3.Button.TextButton" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:minHeight="52dp" android:text="← Back" android:textColor="@color/white"/>
+        <TextView android:id="@+id/title" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:textColor="@color/white"
+            android:textSize="15sp" android:ellipsize="end" android:maxLines="1"/>
+        <com.google.android.material.button.MaterialButton android:id="@+id/saveBtn" style="@style/Widget.Material3.Button.TextButton" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:minHeight="52dp" android:text="Save" android:textColor="@color/white" android:visibility="gone"/>
+    </LinearLayout>
+    <TextView android:id="@+id/status" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center"
+        android:textColor="@color/white" android:textSize="17sp" android:gravity="center" android:padding="24dp"/>
+</FrameLayout>

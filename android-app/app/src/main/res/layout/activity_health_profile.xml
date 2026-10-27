@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent">
+<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="20dp">
+    <TextView style="@style/H2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Your details"/>
+    <com.google.android.material.textfield.TextInputLayout android:id="@+id/nameLayout" style="@style/Field" android:hint="Full name">
+        <com.google.android.material.textfield.TextInputEditText android:id="@+id/name" android:layout_width="match_parent" android:layout_height="wrap_content" android:inputType="textPersonName|textCapWords"/>
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout style="@style/Field" android:hint="Phone number">
+        <com.google.android.material.textfield.TextInputEditText android:id="@+id/phone" android:layout_width="match_parent" android:layout_height="wrap_content" android:inputType="phone"/>
+    </com.google.android.material.textfield.TextInputLayout>
+    <include android:id="@+id/health" layout="@layout/health_fields"/>
+    <TextView android:id="@+id/status" style="@style/Muted" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp"
+        android:accessibilityLiveRegion="polite"/>
+    <com.google.android.material.button.MaterialButton android:id="@+id/saveBtn" style="@style/BigButton" android:text="Save"/>
+</LinearLayout>
+</ScrollView>

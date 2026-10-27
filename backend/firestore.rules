@@ -1,0 +1,152 @@
+rules_version = '2';
+// RideGuard AI Firestore rules. Data model: docs/DATA_MODEL.md.
+// Roles live in users/{uid} (role, companyId, status) so the free Spark plan works without custom claims.
+// The vest writes through Cloud Functions (Admin SDK), which bypass these rules.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() { return request.auth != null; }
+    function userPath(uid) { return /databases/$(database)/documents/users/$(uid); }
+    function me() { return get(userPath(request.auth.uid)).data; }
+    function active() { return signedIn() && exists(userPath(request.auth.uid)) && me().status == 'active'; }
+    function isRider() { return active() && me().role == 'rider'; }
+    function isStaff() { return active() && me().role in ['company_admin', 'company_staff']; }
+    function isAdmin() { return active() && me().role == 'company_admin'; }
+    function myCompany() { return me().companyId; }
+    function sameCompany(cid) { return isStaff() && cid == myCompany(); }
+    function changed() { return request.resource.data.diff(resource.data).affectedKeys(); }
+    function onlyChanged(keys) { return changed().hasOnly(keys); }
+    function newData() { return request.resource.data; }
+
+    match /companies/{cid} {
+      allow get: if active() && myCompany() == cid;
+      allow update: if isAdmin() && myCompany() == cid && onlyChanged(['name', 'countdownSeconds', 'updatedAt']);
+      allow list, create, delete: if false;    // companies are created by the seed script / console
+    }
+
+    // Join codes let riders self-register into a company; they can be fetched by exact code but never listed.
+    match /companyCodes/{code} {
+      allow get: if signedIn();
+      allow create, update: if isAdmin() && newData().companyId == myCompany()
+        && newData().keys().hasOnly(['companyId', 'companyName', 'createdAt']);
+      allow delete: if isAdmin() && resource.data.companyId == myCompany();
+      allow list: if false;
+    }
+
+    match /users/{uid} {
+      function userKeysOk() {
+        return newData().keys().hasOnly(['name', 'email', 'phone', 'role', 'companyId', 'status', 'riderNumber',
+                                         'deviceId', 'joinCode', 'createdAt', 'updatedAt'])
+          && newData().name is string && newData().name.size() > 0 && newData().name.size() < 100;
+      }
+      function codeMatches(code) {
+        return code is string
+          && exists(/databases/$(database)/documents/companyCodes/$(code))
+          && get(/databases/$(database)/documents/companyCodes/$(code)).data.companyId == newData().companyId;
+      }
+
+      allow get: if signedIn() && (request.auth.uid == uid || sameCompany(resource.data.companyId));
+      allow list: if isStaff() && resource.data.companyId == myCompany();
+      allow create: if signedIn() && userKeysOk() && (
+        // rider self-registration: waits for company approval
+        (request.auth.uid == uid && newData().role == 'rider' && newData().status == 'pending' && codeMatches(newData().joinCode))
+        // company staff add an already-approved rider
+        || (isStaff() && newData().companyId == myCompany() && newData().role == 'rider' && newData().status == 'active')
+        // company admin adds staff
+        || (isAdmin() && newData().companyId == myCompany() && newData().role == 'company_staff' && newData().status == 'active'));
+      allow update: if (signedIn() && request.auth.uid == uid && onlyChanged(['name', 'phone', 'updatedAt']))
+        || (isStaff() && resource.data.companyId == myCompany() && resource.data.role == 'rider'
+            && newData().status in ['pending', 'active', 'inactive']
+            && onlyChanged(['status', 'deviceId', 'riderNumber', 'name', 'phone', 'updatedAt']))
+        || (isAdmin() && resource.data.companyId == myCompany() && resource.data.role == 'company_staff'
+            && request.auth.uid != uid && onlyChanged(['status', 'updatedAt']));
+      allow delete: if false;   // riders are deactivated, never hard-deleted from the app
+    }
+
+    // Health data and emergency contact: the rider only. Companies see an incident snapshot (below).
+    match /riderProfiles/{uid} {
+      allow read, write: if signedIn() && request.auth.uid == uid;
+    }
+
+    match /devices/{id} {
+      allow get, list: if (isStaff() && resource.data.companyId == myCompany())
+        || (isRider() && resource.data.riderId == request.auth.uid);
+      allow create: if isStaff() && newData().companyId == myCompany()
+        && newData().keys().hasOnly(['companyId', 'riderId', 'label', 'active', 'createdAt']);
+      allow update: if isStaff() && resource.data.companyId == myCompany() && newData().companyId == myCompany()
+        && onlyChanged(['riderId', 'label', 'active', 'updatedAt']);
+      allow delete: if false;
+    }
+
+    match /incidents/{id} {
+      function canRead(d) { return (isRider() && d.riderId == request.auth.uid) || sameCompany(d.companyId); }
+
+      allow get, list: if canRead(resource.data);
+
+      // App-originated incidents: a simulated countdown, or a manual SOS from the phone.
+      allow create: if isRider()
+        && id.matches('^INC-[A-Z0-9]{4,16}$') && newData().incidentId == id
+        && newData().riderId == request.auth.uid && newData().companyId == myCompany()
+        && newData().source == 'app' && newData().simulated is bool
+        && newData().createdAt == request.time
+        && newData().keys().hasOnly(['incidentId', 'riderId', 'companyId', 'deviceId', 'riderName', 'riderPhone',
+             'status', 'trigger', 'source', 'simulated', 'createdAt', 'confirmedAt', 'countdownSeconds',
+             'latitude', 'longitude', 'locationLastKnown', 'locationUpdatedAt',
+             'peakAccelG', 'peakRotationDps', 'tiltDeg', 'aiVerificationScore', 'aiAssessment',
+             'smsStatus', 'companyNotified', 'frontVideoUploadStatus', 'rearVideoUploadStatus', 'updatedAt'])
+        && ((newData().status == 'pending' && newData().trigger == 'auto' && newData().simulated == true
+             && newData().countdownSeconds is int && newData().countdownSeconds >= 5 && newData().countdownSeconds <= 60)
+            || (newData().status == 'confirmed' && newData().trigger == 'sos'));
+
+      allow update: if isRider() && resource.data.riderId == request.auth.uid && (
+          // A simulated countdown resolves: cancel any time, confirm only once the server clock passes the deadline.
+          (resource.data.source == 'app' && resource.data.simulated == true && resource.data.status == 'pending'
+            && ((newData().status == 'cancelled')
+                || (newData().status == 'confirmed'
+                    && request.time >= resource.data.createdAt + duration.value(resource.data.countdownSeconds, 's')))
+            && onlyChanged(['status', 'confirmedAt', 'cancelledAt', 'smsStatus', 'companyNotified',
+                            'latitude', 'longitude', 'locationLastKnown', 'locationUpdatedAt', 'updatedAt']))
+          // A real (vest) countdown: the app asks the vest to cancel; the vest decides.
+          || (resource.data.status == 'pending' && newData().cancelRequested == true && onlyChanged(['cancelRequested', 'updatedAt']))
+          // After confirmation the SMS cannot be recalled: record a false-alarm report, keep sharing location.
+          || (resource.data.status in ['confirmed', 'acknowledged']
+              && onlyChanged(['falseAlarmRequested', 'latitude', 'longitude', 'locationLastKnown', 'locationUpdatedAt', 'updatedAt']))
+          // Privacy: the rider can ask for a finished incident (and its videos) to be deleted; the company decides.
+          || (resource.data.status in ['closed', 'cancelled'] && newData().deletionRequested == true
+              && onlyChanged(['deletionRequested', 'deletionRequestedAt', 'updatedAt'])))
+        || (sameCompany(resource.data.companyId) && (
+          (resource.data.status == 'confirmed' && newData().status == 'acknowledged'
+            && newData().acknowledgedBy == request.auth.uid && newData().acknowledgedAt == request.time
+            && onlyChanged(['status', 'acknowledgedBy', 'acknowledgedAt', 'updatedAt']))
+          || (resource.data.status in ['confirmed', 'acknowledged'] && newData().status == 'closed'
+            && newData().closedBy == request.auth.uid && newData().closedAt == request.time
+            && newData().outcome in ['rider_safe', 'help_arrived', 'hospital', 'false_alarm', 'other']
+            && onlyChanged(['status', 'closedBy', 'closedAt', 'outcome', 'closeNote', 'updatedAt']))));
+
+      allow delete: if false;
+
+      // Emergency snapshot (contact + health, only with rider consent). Company sees it while the emergency is active.
+      match /private/{doc} {
+        function inc() { return get(/databases/$(database)/documents/incidents/$(id)).data; }
+        allow get: if (isRider() && inc().riderId == request.auth.uid)
+          || (sameCompany(inc().companyId) && inc().status in ['confirmed', 'acknowledged']);
+        allow create: if isRider() && doc == 'medical'
+          && getAfter(/databases/$(database)/documents/incidents/$(id)).data.riderId == request.auth.uid
+          && getAfter(/databases/$(database)/documents/incidents/$(id)).data.status == 'confirmed'
+          && newData().consentEmergencySharing == true;
+        allow list, update, delete: if false;
+      }
+    }
+
+    // Every company view of health data or video is logged by the client; only admins can read the log.
+    match /auditLogs/{id} {
+      allow create: if isStaff() && newData().by == request.auth.uid && newData().companyId == myCompany()
+        && newData().at == request.time
+        && newData().action in ['incident_view', 'medical_access', 'video_access', 'rider_added', 'rider_updated', 'device_updated']
+        && newData().keys().hasOnly(['action', 'by', 'byName', 'companyId', 'incidentId', 'riderId', 'side', 'at', 'detail']);
+      allow list, get: if isAdmin() && resource.data.companyId == myCompany();
+      allow update, delete: if false;
+    }
+
+    match /{document=**} { allow read, write: if false; }   // notificationLogs, deviceEvents, etc.
+  }
+}

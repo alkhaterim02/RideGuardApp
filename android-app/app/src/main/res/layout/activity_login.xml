@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent" android:fillViewport="true">
+<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="24dp">
+    <TextView android:id="@+id/heading" style="@style/H1" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+    <TextView android:id="@+id/error" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp"
+        android:background="@color/redBg" android:textColor="@color/red" android:padding="12dp" android:textSize="15sp" android:visibility="gone"
+        android:accessibilityLiveRegion="assertive"/>
+    <com.google.android.material.textfield.TextInputLayout android:id="@+id/emailLayout" style="@style/Field" android:layout_marginTop="16dp">
+        <com.google.android.material.textfield.TextInputEditText android:id="@+id/email" android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:inputType="textEmailAddress" android:autofillHints="emailAddress" android:minHeight="56dp" android:textSize="18sp"/>
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout android:id="@+id/passwordLayout" style="@style/Field" android:hint="Password" app:endIconMode="password_toggle">
+        <com.google.android.material.textfield.TextInputEditText android:id="@+id/password" android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:inputType="textPassword" android:autofillHints="password" android:minHeight="56dp" android:textSize="18sp"/>
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.button.MaterialButton android:id="@+id/loginBtn" style="@style/BigButton" android:text="Log in" android:layout_marginTop="20dp"/>
+    <ProgressBar android:id="@+id/progress" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:visibility="gone"/>
+    <com.google.android.material.button.MaterialButton android:id="@+id/forgotBtn" style="@style/Widget.Material3.Button.TextButton"
+        android:layout_width="wrap_content" android:layout_height="wrap_content" android:minHeight="52dp" android:text="Forgot password?"/>
+    <com.google.android.material.button.MaterialButton android:id="@+id/registerBtn" style="@style/BigButton.Outlined" android:text="New rider? Register with your company code"/>
+    <TextView android:id="@+id/companyNote" style="@style/Muted" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="16dp"
+        android:text="Company accounts are created by your company administrator in the RideGuard web dashboard."/>
+</LinearLayout>
+</ScrollView>

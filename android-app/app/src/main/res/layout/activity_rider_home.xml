@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
+    <TextView android:id="@+id/banner" style="@style/Banner" android:visibility="gone"/>
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
+        <TextView android:id="@+id/hello" style="@style/Muted" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+
+        <!-- Active emergency (shown only when there is one) -->
+        <com.google.android.material.card.MaterialCardView android:id="@+id/emergencyCard" style="@style/Card" android:visibility="gone"
+            app:cardBackgroundColor="@color/red">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="⚠ Emergency active"
+                    android:textColor="@color/white" android:textSize="22sp" android:textStyle="bold"/>
+                <TextView android:id="@+id/emergencyText" android:layout_width="match_parent" android:layout_height="wrap_content" android:textColor="@color/white" android:textSize="15sp"/>
+                <com.google.android.material.button.MaterialButton android:id="@+id/emergencyBtn" style="@style/BigButton" android:text="Open emergency"
+                    android:backgroundTint="@color/white" android:textColor="@color/red"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Overall state -->
+        <com.google.android.material.card.MaterialCardView android:id="@+id/stateCard" style="@style/Card">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
+                <TextView android:id="@+id/stateTitle" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="30sp" android:textStyle="bold"/>
+                <TextView android:id="@+id/stateText" style="@style/Body" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Vest component status: filled in code -->
+        <com.google.android.material.card.MaterialCardView style="@style/Card">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
+                <TextView style="@style/H2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Your vest"/>
+                <LinearLayout android:id="@+id/statusRows" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.button.MaterialButton android:id="@+id/rideBtn" style="@style/BigButton" android:text="Start ride"/>
+        <com.google.android.material.button.MaterialButton android:id="@+id/sosBtn" style="@style/BigButton" android:minHeight="120dp"
+            android:text="SOS\nSend emergency alert" android:textSize="24sp" android:backgroundTint="@color/red" android:textColor="@color/white"
+            android:contentDescription="SOS: send emergency alert now"/>
+        <com.google.android.material.button.MaterialButton android:id="@+id/simBtn" style="@style/BigButton.Outlined" android:text="Test: simulate a possible accident"/>
+
+        <com.google.android.material.button.MaterialButton android:id="@+id/profileBtn" style="@style/BigButton.Outlined" android:text="Health and emergency contact"/>
+        <com.google.android.material.button.MaterialButton android:id="@+id/historyBtn" style="@style/BigButton.Outlined" android:text="Accident history"/>
+
+        <com.google.android.material.materialswitch.MaterialSwitch android:id="@+id/demoSwitch" android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginTop="16dp" android:minHeight="56dp" android:textSize="15sp"
+            android:text="Demo mode (alerts are marked as simulations)"/>
+        <com.google.android.material.button.MaterialButton android:id="@+id/logoutBtn" style="@style/Widget.Material3.Button.TextButton"
+            android:layout_width="wrap_content" android:layout_height="wrap_content" android:minHeight="52dp" android:text="Sign out"/>
+    </LinearLayout>
+</LinearLayout>
+</ScrollView>

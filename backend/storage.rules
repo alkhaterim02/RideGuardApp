@@ -1,0 +1,18 @@
+rules_version = '2';
+// Videos live at incidents/{companyId}/{riderId}/{incidentId}/{front|rear}_accident_video.mp4.
+// The vest uploads through short-lived signed URLs from Cloud Functions, so client writes are denied.
+// Roles come from Firestore users/{uid} (same model as firestore.rules).
+service firebase.storage {
+  match /b/{bucket}/o {
+    function me() { return firestore.get(/databases/(default)/documents/users/$(request.auth.uid)).data; }
+    function active() { return request.auth != null && me().status == 'active'; }
+
+    match /incidents/{companyId}/{riderId}/{incidentId}/{file} {
+      allow read: if active() && (
+        (me().role in ['company_admin', 'company_staff'] && me().companyId == companyId)
+        || (me().role == 'rider' && request.auth.uid == riderId));
+      allow write: if false;
+    }
+    match /{allPaths=**} { allow read, write: if false; }
+  }
+}

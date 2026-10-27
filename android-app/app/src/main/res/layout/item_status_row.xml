@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:orientation="horizontal" android:minHeight="40dp" android:gravity="center_vertical">
+    <TextView android:id="@+id/label" style="@style/Body" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"/>
+    <TextView android:id="@+id/value" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/pill"
+        android:paddingStart="10dp" android:paddingEnd="10dp" android:paddingTop="3dp" android:paddingBottom="3dp" android:textSize="14sp" android:textStyle="bold"/>
+</LinearLayout>

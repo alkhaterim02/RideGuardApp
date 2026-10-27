@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
+    <TextView android:id="@+id/hello" style="@style/Muted" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+
+    <GridLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:columnCount="2" android:layout_marginTop="8dp">
+        <com.google.android.material.card.MaterialCardView android:id="@+id/statActiveCard" style="@style/Card" android:layout_width="0dp" android:layout_columnWeight="1" android:layout_margin="4dp">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
+                <TextView android:id="@+id/statActive" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="32sp" android:textStyle="bold" android:textColor="@color/ink"/>
+                <TextView style="@style/Muted" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Active emergencies"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+        <com.google.android.material.card.MaterialCardView style="@style/Card" android:layout_width="0dp" android:layout_columnWeight="1" android:layout_margin="4dp">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
+                <TextView android:id="@+id/statRiders" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="32sp" android:textStyle="bold" android:textColor="@color/ink"/>
+                <TextView style="@style/Muted" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Registered riders"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+        <com.google.android.material.card.MaterialCardView style="@style/Card" android:layout_width="0dp" android:layout_columnWeight="1" android:layout_margin="4dp">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
+                <TextView android:id="@+id/statVests" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="32sp" android:textStyle="bold" android:textColor="@color/ink"/>
+                <TextView style="@style/Muted" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Connected vests"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+        <com.google.android.material.card.MaterialCardView style="@style/Card" android:layout_width="0dp" android:layout_columnWeight="1" android:layout_margin="4dp">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
+                <TextView android:id="@+id/statProblems" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="32sp" android:textStyle="bold" android:textColor="@color/ink"/>
+                <TextView style="@style/Muted" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Vests with problems"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </GridLayout>
+
+    <com.google.android.material.textfield.TextInputLayout style="@style/Field" android:hint="Search rider name or incident number" app:startIconDrawable="@android:drawable/ic_menu_search">
+        <com.google.android.material.textfield.TextInputEditText android:id="@+id/search" android:layout_width="match_parent" android:layout_height="wrap_content" android:inputType="text"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView android:id="@+id/listTitle" style="@style/H2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="16dp" android:text="Active emergencies"/>
+    <TextView android:id="@+id/empty" style="@style/Muted" android:layout_width="match_parent" android:layout_height="wrap_content" android:padding="12dp" android:text="✔ No active emergencies." android:visibility="gone"/>
+    <androidx.recyclerview.widget.RecyclerView android:id="@+id/list" android:layout_width="match_parent" android:layout_height="wrap_content" android:nestedScrollingEnabled="false"/>
+
+    <com.google.android.material.card.MaterialCardView style="@style/Card">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
+            <TextView style="@style/H2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Vests with problems"/>
+            <TextView android:id="@+id/problems" style="@style/Body" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.button.MaterialButton android:id="@+id/historyBtn" style="@style/BigButton.Outlined" android:text="Emergency history"/>
+    <com.google.android.material.button.MaterialButton android:id="@+id/ridersBtn" style="@style/BigButton.Outlined" android:text="Riders and vests"/>
+    <com.google.android.material.button.MaterialButton android:id="@+id/logoutBtn" style="@style/Widget.Material3.Button.TextButton" android:layout_width="wrap_content"
+        android:layout_height="wrap_content" android:minHeight="52dp" android:text="Sign out"/>
+</LinearLayout>
+</androidx.core.widget.NestedScrollView>

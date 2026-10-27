@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent">
+<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
+    <TextView android:id="@+id/banner" style="@style/Banner" android:visibility="gone"/>
+    <LinearLayout android:id="@+id/head" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical"
+        android:background="@color/red" android:padding="20dp">
+        <TextView android:id="@+id/headline" android:layout_width="match_parent" android:layout_height="wrap_content" android:textColor="@color/white"
+            android:textSize="28sp" android:textStyle="bold" android:accessibilityLiveRegion="polite"/>
+        <TextView android:id="@+id/subline" android:layout_width="match_parent" android:layout_height="wrap_content" android:textColor="#FFE3E0" android:textSize="16sp"/>
+    </LinearLayout>
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
+        <com.google.android.material.button.MaterialButton android:id="@+id/callBtn" style="@style/BigButton" android:layout_marginTop="0dp" android:text="📞 Call emergency contact"/>
+        <com.google.android.material.button.MaterialButton android:id="@+id/smsBtn" style="@style/BigButton.Outlined" android:text="✉ Text emergency contact my location" android:visibility="gone"/>
+
+        <com.google.android.material.card.MaterialCardView style="@style/Card">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
+                <TextView style="@style/H2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Who has been told"/>
+                <LinearLayout android:id="@+id/rows" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView style="@style/Card">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
+                <TextView style="@style/H2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Your location"/>
+                <TextView android:id="@+id/location" style="@style/Body" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+                <org.osmdroid.views.MapView android:id="@+id/map" android:layout_width="match_parent" android:layout_height="220dp" android:layout_marginTop="8dp"/>
+                <com.google.android.material.button.MaterialButton android:id="@+id/locBtn" style="@style/BigButton.Outlined" android:text="Update my location"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.button.MaterialButton android:id="@+id/falseAlarmBtn" style="@style/BigButton.Outlined" android:text="I am OK – report a false alarm"/>
+        <TextView style="@style/Muted" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="6dp"
+            android:text="An SMS that was already sent cannot be taken back. Reporting a false alarm tells your company you are safe."/>
+        <com.google.android.material.button.MaterialButton android:id="@+id/homeBtn" style="@style/Widget.Material3.Button.TextButton"
+            android:layout_width="wrap_content" android:layout_height="wrap_content" android:minHeight="56dp" android:layout_marginTop="8dp" android:text="Back to home"/>
+    </LinearLayout>
+</LinearLayout>
+</ScrollView>

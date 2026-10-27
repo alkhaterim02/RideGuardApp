@@ -1,0 +1,29 @@
+# secrets
+.env
+google-services.json
+*serviceAccount*.json
+*.keystore
+local.properties
+# android
+android-app/build/
+android-app/.gradle/
+android-app/app/build/
+.idea/
+# python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+# node / firebase
+node_modules/
+.firebase/
+firebase-debug.log
+# runtime data
+*.sqlite3
+raspberry-pi/data/
+.env.local
+web-dashboard/dist/
+*-debug.log
+# promo media (not part of the app)
+*-voiceover/
+*-voiceover.wav

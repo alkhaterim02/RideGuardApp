@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="navy">#0F1B2D</color>
+    <color name="navy2">#182841</color>
+    <color name="paper">#F3F5F8</color>
+    <color name="ink">#14213A</color>
+    <color name="muted">#5B6577</color>
+    <color name="line">#DDE2EA</color>
+    <color name="white">#FFFFFF</color>
+    <color name="red">#B3241B</color>
+    <color name="redBg">#FDE8E6</color>
+    <color name="amber">#8A5200</color>
+    <color name="amberBg">#FFF1D1</color>
+    <color name="amberBright">#FFD27A</color>
+    <color name="green">#176B49</color>
+    <color name="greenBg">#E2F4EA</color>
+    <color name="grey">#4C5667</color>
+    <color name="greyBg">#ECEFF3</color>
+    <color name="blue">#1D4F91</color>
+    <color name="blueBg">#E5EEFB</color>
+</resources>
