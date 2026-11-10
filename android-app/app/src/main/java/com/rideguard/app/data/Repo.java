@@ -107,7 +107,6 @@ public final class Repo {
         m.put("aiAssessment", "rider_down_likely");
         m.put("smsStatus", "pending");
         m.put("frontVideoUploadStatus", "none");
-        m.put("rearVideoUploadStatus", "none");
         return incidentRef(id).set(m);
     }
 

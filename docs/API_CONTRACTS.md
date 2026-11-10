@@ -13,7 +13,7 @@ The server takes `riderId` and `companyId` from the device record, never from th
 | `/device/create_incident` | `incident_id`, `latitude`, `longitude`, `location_last_known`, `sms_status`, `ai{score,assessment}` | `confirmed`; notifies company; snapshots medical info only if rider consented |
 | `/device/incident_cancelled` | `incident_id` | `cancelled` (only from `pending`) |
 | `/device/heartbeat` | `status{...}` | `{cancel_requested:[incident_id,...]}` - app cancel requests the vest must act on |
-| `/device/upload_url` | `incident_id`, `side` (front/rear) | `{url, path, content_type}` signed PUT URL (15 min) |
+| `/device/upload_url` | `incident_id`, `side` (`front` – the vest has one camera) | `{url, path, content_type}` signed PUT URL (15 min) |
 | `/device/upload_complete` | `incident_id`, `side` | marks video uploaded |
 
 Responses: `200 {ok, changed}`; repeat of an applied event returns `changed:false`.
@@ -28,7 +28,7 @@ Incident status: `pending -> confirmed | cancelled`, `confirmed -> acknowledged 
 | `POST /company/incidents/{id}/acknowledge` | audited; notifies |
 | `POST /company/incidents/{id}/close` body `{confirm:true}` | `400 confirmation_required` without confirm; audited |
 | `GET /incidents/{id}/medical` | company: only confirmed/acknowledged and rider consent; every attempt audited |
-| `GET /incidents/{id}/video/{front\|rear}` | 5-minute signed read URL; audited; never public |
+| `GET /incidents/{id}/video/front` | 5-minute signed read URL; audited; never public |
 
 Other tenants' incidents return `404` (not `403`) so IDs are not revealed.
 

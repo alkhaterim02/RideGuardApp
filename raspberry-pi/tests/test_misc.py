@@ -78,9 +78,9 @@ def test_upload_flow_signed_url_then_complete(tmp_path):
 def test_upload_failures_return_false(tmp_path):
     f = tmp_path / "v.mp4"; f.write_bytes(b"V")
     def no_url(req, timeout): return JsonResp(200, b"{}")
-    assert HttpBackend("https://x", "d", "s", opener=no_url).send("upload_rear", {"incident_id": "I", "path": str(f)}) is False
+    assert HttpBackend("https://x", "d", "s", opener=no_url).send("upload_front", {"incident_id": "I", "path": str(f)}) is False
     def ok_url(req, timeout): return JsonResp(200, b'{"url":"https://s.example/p"}')
-    assert HttpBackend("https://x", "d", "s", opener=ok_url).send("upload_rear", {"incident_id": "I", "path": str(tmp_path / "missing.mp4")}) is False
+    assert HttpBackend("https://x", "d", "s", opener=ok_url).send("upload_front", {"incident_id": "I", "path": str(tmp_path / "missing.mp4")}) is False
 
 
 def test_heartbeat_returns_cancel_requests_or_none():

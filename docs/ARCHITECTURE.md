@@ -15,7 +15,7 @@ Implemented in `raspberry-pi/rideguard/state_machine.py`. Manual SOS goes Ready/
 `detection/detector.py`: an impact (>= `impact_g`) is only reported as a possible accident when corroborated within `window_s` by high rotation, abnormal tilt, or a stationary state. Lone impacts (potholes) are ignored. Calibrate thresholds with controlled bench tests (shake rig, dummy), never real crashes.
 
 ## Emergency priority (enforced by the orchestrator, to be built)
-confirm -> best location (label last-known if stale) -> direct SMS -> backend incident sync -> app/company notify -> metadata -> finalize videos -> upload front -> upload rear -> location updates. SMS never waits on cloud, app, or video.
+confirm -> best location (label last-known if stale) -> direct SMS -> backend incident sync -> app/company notify -> metadata -> finalize video -> upload front-camera clip -> location updates. SMS never waits on cloud, app, or video.
 
 ## Durability
 `queue/incident_queue.py`: SQLite jobs keyed by (incident_id, kind); re-enqueue is a no-op; bounded exponential backoff; survives restart.

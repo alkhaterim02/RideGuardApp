@@ -1,5 +1,5 @@
 rules_version = '2';
-// RideGuard AI Firestore rules. Data model: docs/DATA_MODEL.md.
+// RideGuard Firestore rules. Data model: docs/DATA_MODEL.md.
 // Roles live in users/{uid} (role, companyId, status) so the free Spark plan works without custom claims.
 // The vest writes through Cloud Functions (Admin SDK), which bypass these rules.
 service cloud.firestore {
@@ -92,7 +92,7 @@ service cloud.firestore {
              'status', 'trigger', 'source', 'simulated', 'createdAt', 'confirmedAt', 'countdownSeconds',
              'latitude', 'longitude', 'locationLastKnown', 'locationUpdatedAt',
              'peakAccelG', 'peakRotationDps', 'tiltDeg', 'aiVerificationScore', 'aiAssessment',
-             'smsStatus', 'companyNotified', 'frontVideoUploadStatus', 'rearVideoUploadStatus', 'updatedAt'])
+             'smsStatus', 'companyNotified', 'frontVideoUploadStatus', 'updatedAt'])
         && ((newData().status == 'pending' && newData().trigger == 'auto' && newData().simulated == true
              && newData().countdownSeconds is int && newData().countdownSeconds >= 5 && newData().countdownSeconds <= 60)
             || (newData().status == 'confirmed' && newData().trigger == 'sos'));

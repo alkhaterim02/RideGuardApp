@@ -4,10 +4,10 @@ import { videoLabel } from '../lib/format';
 import { friendlyError, loadVideo } from '../lib/actions';
 import { Badge } from './ui';
 
-/** One accident clip. Loaded only on request (it is sensitive and large) and each view is audited. */
-export function VideoPanel({ incident, side, me }: { incident: Incident; side: 'front' | 'rear'; me: UserDoc }) {
-  const status = side === 'front' ? incident.frontVideoUploadStatus : incident.rearVideoUploadStatus;
-  const path = side === 'front' ? incident.frontVideoPath : incident.rearVideoPath;
+/** The accident clip from the vest's single front camera. Loaded only on request (it is sensitive and large) and each view is audited. */
+export function VideoPanel({ incident, me }: { incident: Incident; me: UserDoc }) {
+  const status = incident.frontVideoUploadStatus;
+  const path = incident.frontVideoPath;
   const [url, setUrl] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState<string | null>(null);
@@ -18,13 +18,13 @@ export function VideoPanel({ incident, side, me }: { incident: Incident; side: '
   const load = async () => {
     if (!path) return;
     setBusy(true); setErr(null);
-    try { setUrl(await loadVideo(path, incident.id, side, me)); } catch (e) { setErr(friendlyError(e)); } finally { setBusy(false); }
+    try { setUrl(await loadVideo(path, incident.id, me)); } catch (e) { setErr(friendlyError(e)); } finally { setBusy(false); }
   };
 
   return (
     <div className="video">
       <div className="video-head">
-        <strong>{side === 'front' ? 'Front camera' : 'Rear camera'}</strong>
+        <strong>Front camera</strong>
         <Badge tone={l.tone}>{l.text}</Badge>
       </div>
       {url ? (

@@ -6,7 +6,7 @@ const P = require('./policy');
 const sha = (s) => crypto.createHash('sha256').update(s).digest('hex');
 const safeEq = (a, b) => { const x = Buffer.from(a), y = Buffer.from(b); return x.length === y.length && crypto.timingSafeEqual(x, y); };
 const R = (status, body) => ({ status, body });
-const SIDES = new Set(['front', 'rear']);
+const SIDES = new Set(['front']);   // the vest has a single front camera
 const EVENT_KINDS = new Set(['possible_accident', 'create_incident', 'incident_cancelled']);
 
 async function authDevice(store, headers) {

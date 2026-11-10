@@ -1,4 +1,4 @@
-# RideGuard AI
+# RideGuard
 
 Motorcycle accident detection vest + **Android app** (riders and companies) + **web dashboard** (companies), on **Firebase**.
 University prototype.

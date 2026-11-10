@@ -38,7 +38,7 @@ public class EmergencyActivity extends BaseActivity {
         b.smsBtn.setOnClickListener(v -> {
             if (contactPhone == null || inc == null) { Ui.toast(this, "Add an emergency contact in your health profile."); return; }
             String where = inc.hasLocation() ? " Location: " + Ui.mapsUrl(inc.latitude, inc.longitude) : "";
-            Ui.sms(this, contactPhone, "RideGuard AI emergency: " + Session.user().name + " needs help (incident " + id + ")." + where);
+            Ui.sms(this, contactPhone, "RideGuard emergency: " + Session.user().name + " needs help (incident " + id + ")." + where);
         });
         b.locBtn.setOnClickListener(v -> updateLocation());
         b.falseAlarmBtn.setOnClickListener(v -> new MaterialAlertDialogBuilder(this)
@@ -73,8 +73,7 @@ public class EmergencyActivity extends BaseActivity {
         b.rows.removeAllViews();
         row("Emergency contact SMS", Labels.sms(inc.smsStatus), smsGood(inc.smsStatus));
         row("Company", Incident.ACKNOWLEDGED.equals(inc.status) ? "✔ Acknowledged" : Labels.company(inc.companyNotified), true);
-        row("Front video", Labels.video(inc.frontVideoUploadStatus), "uploaded".equals(inc.frontVideoUploadStatus));
-        row("Rear video", Labels.video(inc.rearVideoUploadStatus), "uploaded".equals(inc.rearVideoUploadStatus));
+        row("Video", Labels.video(inc.frontVideoUploadStatus), "uploaded".equals(inc.frontVideoUploadStatus));
         b.smsBtn.setVisibility(contactPhone != null && ("no_vest".equals(inc.smsStatus) || "failed".equals(inc.smsStatus)) ? View.VISIBLE : View.GONE);
 
         if (inc.hasLocation()) {

@@ -9,7 +9,7 @@ import urllib.request
 from typing import Optional
 
 log = logging.getLogger("rideguard.backend")
-UPLOAD_KINDS = {"upload_front": "front", "upload_rear": "rear"}
+UPLOAD_KINDS = {"upload_front": "front"}   # the vest has a single front camera
 
 
 class HttpBackend:

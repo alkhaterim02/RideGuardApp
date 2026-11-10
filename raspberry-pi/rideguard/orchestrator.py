@@ -190,7 +190,7 @@ class Orchestrator:
             clips = {}
             inc["camera_faults"].append("finish_failed")
         queued = False
-        for side in ("front", "rear"):
+        for side in ("front",):   # single front camera
             if clips.get(side):
                 self.queue.enqueue(inc["incident_id"], f"upload_{side}",
                                    {"incident_id": inc["incident_id"], "path": clips[side]})

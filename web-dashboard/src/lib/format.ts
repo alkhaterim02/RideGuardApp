@@ -71,7 +71,7 @@ export function deviceProblems(d: Device, now = Date.now()): string[] {
   if (d.active === false) return p;
   if (!deviceOnline(d, now)) p.push('Offline');
   const s = d.status || {};
-  const parts: [keyof typeof s, string][] = [['imu', 'Motion sensor'], ['frontCamera', 'Front camera'], ['rearCamera', 'Rear camera'], ['lte', '4G'], ['gnss', 'GPS']];
+  const parts: [keyof typeof s, string][] = [['imu', 'Motion sensor'], ['frontCamera', 'Front camera'], ['lte', '4G'], ['gnss', 'GPS']];
   for (const [k, name] of parts) if (s[k] && s[k] !== 'ok') p.push(`${name}: ${s[k]}`);
   if (typeof s.battery === 'number' && s.battery < 20 && deviceOnline(d, now)) p.push(`Battery ${s.battery}%`);
   return p;

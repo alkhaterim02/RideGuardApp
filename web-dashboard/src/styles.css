@@ -197,7 +197,7 @@ input:focus, select:focus, textarea:focus, .btn:focus-visible { outline: 3px sol
 .timeline li::before { content: ''; position: absolute; left: -7.5px; top: 9px; width: 12px; height: 12px; border-radius: 50%; background: var(--navy); }
 .note { background: var(--paper); border-radius: 8px; padding: 8px 12px; font-style: italic; }
 .map { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); }
-.videos { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.videos { max-width: 720px; }
 .video-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
 .video video, .video-placeholder { width: 100%; aspect-ratio: 16 / 9; border-radius: 8px; background: #0b1322; }
 .video-placeholder { display: grid; place-items: center; color: #c9d3e3; padding: 20px; text-align: center; }
@@ -216,6 +216,6 @@ input:focus, select:focus, textarea:focus, .btn:focus-visible { outline: 3px sol
   .menu-btn { display: inline-flex !important; }
   .content, .topbar { padding-left: 16px; padding-right: 16px; }
   .alarm { padding: 12px 16px; flex-wrap: wrap; }
-  .videos, .row2 { grid-template-columns: 1fr; }
+  .row2 { grid-template-columns: 1fr; }
   .kv { grid-template-columns: 120px 1fr; }
 }

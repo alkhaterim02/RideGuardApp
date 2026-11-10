@@ -3,17 +3,8 @@ import type { Incident } from '../lib/types';
 import { ago, dateTime, isEmergency, ms, smsLabel, videoLabel } from '../lib/format';
 import { Badge, SimBadge, StatusBadge } from './ui';
 
-function videoSummary(i: Incident) {
-  const f = i.frontVideoUploadStatus, r = i.rearVideoUploadStatus;
-  if (!f && !r) return videoLabel(undefined);
-  if (f === 'uploaded' && r === 'uploaded') return { text: 'Both videos ready', tone: 'green' as const };
-  if (f === 'failed' || r === 'failed') return { text: 'A video upload failed', tone: 'red' as const };
-  if (f === 'uploaded' || r === 'uploaded') return { text: 'One video ready, one pending', tone: 'amber' as const };
-  return videoLabel(f || r);
-}
-
 export function IncidentCard({ i, now }: { i: Incident; now: number }) {
-  const v = videoSummary(i);
+  const v = videoLabel(i.frontVideoUploadStatus);
   const sms = smsLabel(i.smsStatus);
   const deadline = i.status === 'pending' && i.createdAt ? ms(i.createdAt) + (i.countdownSeconds || 20) * 1000 : 0;
   const left = deadline ? Math.max(0, Math.ceil((deadline - now) / 1000)) : 0;

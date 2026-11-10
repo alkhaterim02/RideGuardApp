@@ -30,8 +30,8 @@ public class WelcomeActivity extends BaseActivity {
         b.riderBtn.setOnClickListener(v -> startActivity(new Intent(this, LoginActivity.class).putExtra(LoginActivity.EXTRA_RIDER, true)));
         b.companyBtn.setOnClickListener(v -> startActivity(new Intent(this, LoginActivity.class).putExtra(LoginActivity.EXTRA_RIDER, false)));
         b.helpBtn.setOnClickListener(v -> new MaterialAlertDialogBuilder(this)
-                .setTitle("About RideGuard AI")
-                .setMessage("RideGuard AI is a smart vest for motorcycle riders. It detects a possible accident, gives you "
+                .setTitle("About RideGuard")
+                .setMessage("RideGuard is a smart vest for motorcycle riders. It detects a possible accident, gives you "
                         + "time to cancel, then sends your location to your emergency contact and your company.\n\n"
                         + "Riders: sign in with the email your company gave you, or register with your company's join code.\n\n"
                         + "Companies: sign in with your staff account to see and manage emergencies.\n\n"

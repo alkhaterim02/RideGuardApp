@@ -133,7 +133,7 @@ public class CompanyHomeActivity extends BaseActivity {
             total++;
             List<String> p = new ArrayList<>();
             if (d.online(now)) online++; else p.add("offline");
-            for (String[] k : new String[][]{{"imu", "motion sensor"}, {"frontCamera", "front camera"}, {"rearCamera", "rear camera"}, {"lte", "4G"}, {"gnss", "GPS"}}) {
+            for (String[] k : new String[][]{{"imu", "motion sensor"}, {"frontCamera", "front camera"}, {"lte", "4G"}, {"gnss", "GPS"}}) {
                 String v = d.part(k[0]);
                 if (d.online(now) && v != null && !"ok".equals(v)) p.add(k[1] + ": " + v);
             }

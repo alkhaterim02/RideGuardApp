@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="navy">#0F1B2D</color>
+    <color name="logoBg">#FAF7F0</color>
     <color name="navy2">#182841</color>
     <color name="paper">#F3F5F8</color>
     <color name="ink">#14213A</color>

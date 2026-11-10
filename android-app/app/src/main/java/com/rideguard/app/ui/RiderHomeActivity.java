@@ -141,7 +141,6 @@ public class RiderHomeActivity extends BaseActivity {
             if (bat != null) row("Battery", bat + "%", bat < 20 ? R.color.red : bat < 40 ? R.color.amber : R.color.green, bat < 20 ? R.color.redBg : bat < 40 ? R.color.amberBg : R.color.greenBg);
             part("Motion sensor", simulatedVest ? "ok" : device.part("imu"));
             part("Front camera", simulatedVest ? "ok" : device.part("frontCamera"));
-            part("Rear camera", simulatedVest ? "ok" : device.part("rearCamera"));
             part("Mobile data (4G)", simulatedVest ? "ok" : device.part("lte"));
             part("GPS location", simulatedVest ? "ok" : device.part("gnss"));
         }

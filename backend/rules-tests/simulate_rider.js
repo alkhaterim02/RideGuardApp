@@ -44,7 +44,7 @@ if (mode === 'sos') {
 } else {
   await setDoc(doc(db, 'incidents', id), { ...base, simulated: true, status: 'pending', trigger: 'auto', countdownSeconds: 5,
     peakAccelG: 6.4, peakRotationDps: 380, tiltDeg: 78, aiVerificationScore: 0.81, aiAssessment: 'rider_down_likely',
-    smsStatus: 'pending', frontVideoUploadStatus: 'none', rearVideoUploadStatus: 'none' });
+    smsStatus: 'pending', frontVideoUploadStatus: 'none' });
   console.log(`Possible accident ${id} for ${me.name}: 5 s countdown…`);
   if (mode === 'cancel') {
     await sleep(2000);

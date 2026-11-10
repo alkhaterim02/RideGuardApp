@@ -41,8 +41,7 @@ class IncidentAdapter extends RecyclerView.Adapter<IncidentAdapter.VH> {
         String where = i.hasLocation() ? String.format(Locale.US, "%.4f, %.4f", i.latitude, i.longitude) : "Location pending";
         h.b.sub.setText((showRider ? when + " · " : "") + i.id + (i.isSos() ? " · 🆘 SOS" : "") + "\n" + where);
 
-        int videos = ("uploaded".equals(i.frontVideoUploadStatus) ? 1 : 0) + ("uploaded".equals(i.rearVideoUploadStatus) ? 1 : 0);
-        String foot = "SMS: " + Labels.sms(i.smsStatus) + " · Videos: " + (videos == 0 ? "none" : videos + " of 2");
+        String foot = "SMS: " + Labels.sms(i.smsStatus) + " · Video: " + Labels.video(i.frontVideoUploadStatus);
         if (Incident.CLOSED.equals(i.status) && i.outcome != null) foot += "\nResult: " + Labels.outcome(i.outcome);
         if (i.falseAlarmRequested) foot += "\n! Rider reported a false alarm";
         h.b.foot.setText(foot);

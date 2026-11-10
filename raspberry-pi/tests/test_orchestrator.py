@@ -55,7 +55,7 @@ def test_expiry_sends_sms_before_backend_job_is_queued():
     assert seen["has_create"] is False                       # SMS attempted first
     assert "INC-TEST" in seen["text"] and "53.34981" in seen["text"]
     assert o.ind.leds["red"] and o.incident["sms_status"] == "accepted"
-    assert {"create_incident", "upload_front", "upload_rear"} <= set(kinds(o))
+    assert {"create_incident", "upload_front"} <= set(kinds(o))
 
 
 def test_sms_failure_is_recorded_and_not_claimed():

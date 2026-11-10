@@ -6,7 +6,7 @@ import { ago, deviceOnline, deviceProblems } from '../lib/format';
 import { addVest, friendlyError, setVestActive } from '../lib/actions';
 import { Badge, Empty, Field, Modal, Notice } from '../components/ui';
 
-const PARTS: [keyof NonNullable<Device['status']>, string][] = [['imu', 'Motion'], ['frontCamera', 'Front cam'], ['rearCamera', 'Rear cam'], ['lte', '4G'], ['gnss', 'GPS']];
+const PARTS: [keyof NonNullable<Device['status']>, string][] = [['imu', 'Motion'], ['frontCamera', 'Camera'], ['lte', '4G'], ['gnss', 'GPS']];
 
 export function Vests() {
   const { profile: me } = useAuth();

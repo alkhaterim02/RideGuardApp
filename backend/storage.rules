@@ -1,5 +1,5 @@
 rules_version = '2';
-// Videos live at incidents/{companyId}/{riderId}/{incidentId}/{front|rear}_accident_video.mp4.
+// Videos live at incidents/{companyId}/{riderId}/{incidentId}/front_accident_video.mp4 (the vest has one front camera).
 // The vest uploads through short-lived signed URLs from Cloud Functions, so client writes are denied.
 // Roles come from Firestore users/{uid} (same model as firestore.rules).
 service firebase.storage {

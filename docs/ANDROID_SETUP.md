@@ -27,7 +27,7 @@ osmdroid (OpenStreetMap, no API key) for maps, Media3 ExoPlayer for accident vid
 | 13.6 Countdown | `CountdownActivity` | opens automatically for any pending incident; huge Cancel button; tone + vibration; shows over lock screen |
 | 13.7 Emergency confirmed | `EmergencyActivity` | SMS / company / video status, map, call or text contact, update location, report false alarm |
 | 13.8 Accident history | `IncidentListActivity` | rider's incidents |
-| 13.9 / 14.4 Incident details + video | `IncidentDetailActivity`, `VideoActivity` | map + directions, sensor summary, front/rear video (download for riders), deletion request; company: contact + health (audited), call buttons, acknowledge, close with outcome + confirmation |
+| 13.9 / 14.4 Incident details + video | `IncidentDetailActivity`, `VideoActivity` | map + directions, sensor summary, front-camera video (download for riders), deletion request; company: contact + health (audited), call buttons, acknowledge, close with outcome + confirmation |
 | 14.2 / 14.3 Company dashboard + active list | `CompanyHomeActivity` | counts, search, active emergencies first in red, vests with problems, in-app alarm for new emergencies |
 | 14.5 Rider management | `RidersActivity` | approve/reject registrations, add rider, assign vest, deactivate, reset password, call |
 | 14.6 Emergency history | `IncidentListActivity` (staff) | search + filters (confirmed, false alarms, active) |

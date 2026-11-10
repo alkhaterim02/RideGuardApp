@@ -1,4 +1,4 @@
-# How to run RideGuard AI – step by step (Windows)
+# How to run RideGuard – step by step (Windows)
 
 This guide takes you from nothing to a working system: the **web dashboard** in your browser and the **Android app** on a phone
 or emulator, both connected to **your own Firebase project**.
@@ -236,8 +236,8 @@ If all of this works, Part B is complete. 🎉
   Then register a vest in the dashboard and give it its secret:
   `$env:GOOGLE_APPLICATION_CREDENTIALS="C:\keys\rideguard-key.json"; node scripts/provision_device.js vest-001 <company-id>`
   (copy the printed lines into the vest's `.env` file).
-- **Accident videos for the demo:** have two short `.mp4` files and run the seed with
-  `--video C:\path\front.mp4 --rear-video C:\path\rear.mp4` (needs Storage, step B4).
+- **Accident video for the demo:** have one short `.mp4` file and run the seed with
+  `--video C:\path\front.mp4` (needs Storage, step B4).
 
 ---
 

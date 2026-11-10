@@ -9,7 +9,7 @@ public class Incident {
             CLOSED = "closed", CANCELLED = "cancelled";
 
     public String id, riderId, companyId, deviceId, riderName, riderPhone, status, trigger, source, smsStatus,
-            companyNotified, frontVideoUploadStatus, rearVideoUploadStatus, frontVideoPath, rearVideoPath,
+            companyNotified, frontVideoUploadStatus, frontVideoPath,
             acknowledgedBy, closedBy, outcome, closeNote, aiAssessment;
     public boolean simulated, cancelRequested, falseAlarmRequested, deletionRequested, locationLastKnown;
     public Double latitude, longitude, peakAccelG, peakRotationDps, tiltDeg, aiVerificationScore;
@@ -32,9 +32,7 @@ public class Incident {
         i.smsStatus = d.getString("smsStatus");
         i.companyNotified = d.getString("companyNotified");
         i.frontVideoUploadStatus = d.getString("frontVideoUploadStatus");
-        i.rearVideoUploadStatus = d.getString("rearVideoUploadStatus");
         i.frontVideoPath = d.getString("frontVideoPath");
-        i.rearVideoPath = d.getString("rearVideoPath");
         i.acknowledgedBy = d.getString("acknowledgedBy");
         i.closedBy = d.getString("closedBy");
         i.outcome = d.getString("outcome");

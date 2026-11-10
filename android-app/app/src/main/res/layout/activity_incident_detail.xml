@@ -56,11 +56,9 @@
 
         <com.google.android.material.card.MaterialCardView style="@style/Card">
             <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
-                <TextView style="@style/H2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Accident videos"/>
+                <TextView style="@style/H2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Accident video"/>
                 <TextView android:id="@+id/frontStatus" style="@style/Body" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="6dp"/>
-                <com.google.android.material.button.MaterialButton android:id="@+id/frontBtn" style="@style/BigButton.Outlined" android:text="▶ Play front video"/>
-                <TextView android:id="@+id/rearStatus" style="@style/Body" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp"/>
-                <com.google.android.material.button.MaterialButton android:id="@+id/rearBtn" style="@style/BigButton.Outlined" android:text="▶ Play rear video"/>
+                <com.google.android.material.button.MaterialButton android:id="@+id/frontBtn" style="@style/BigButton.Outlined" android:text="▶ Play video"/>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 

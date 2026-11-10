@@ -55,7 +55,7 @@ function applyDeviceEvent(existing, kind, payload, device) {
       aiVerificationScore: payload.ai && payload.ai.score != null ? payload.ai.score : null,
       source: 'vest', simulated: false, trigger: payload.trigger === 'sos' ? 'sos' : 'auto',
       peakAccelG: num(payload.peak_accel_g), peakRotationDps: num(payload.peak_rotation_dps), tiltDeg: num(payload.tilt_deg),
-      frontVideoUploadStatus: 'pending', rearVideoUploadStatus: 'pending',
+      frontVideoUploadStatus: 'pending',
     } };
   }
   if (existing.deviceId !== device.deviceId) return { ok: false, error: 'wrong_device' };

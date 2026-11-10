@@ -160,10 +160,9 @@ export function IncidentDetail() {
       </div>
 
       <section className="panel">
-        <h2>Accident videos</h2>
+        <h2>Accident video</h2>
         <div className="videos">
-          <VideoPanel incident={i} side="front" me={me} />
-          <VideoPanel incident={i} side="rear" me={me} />
+          <VideoPanel incident={i} me={me} />
         </div>
       </section>
 

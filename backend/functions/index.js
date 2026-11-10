@@ -73,7 +73,7 @@ exports.api = onRequest({ region: 'europe-west1', maxInstances: 10 }, async (req
         out = await H.handleRiderCancel(store, user, m[1]);
       } else if (req.method === 'GET' && (m = /^\/incidents\/([A-Z0-9-]+)\/medical$/.exec(path))) {
         out = await H.handleMedical(store, user, m[1]);
-      } else if (req.method === 'GET' && (m = /^\/incidents\/([A-Z0-9-]+)\/video\/(front|rear)$/.exec(path))) {
+      } else if (req.method === 'GET' && (m = /^\/incidents\/([A-Z0-9-]+)\/video\/(front)$/.exec(path))) {
         out = await H.handleVideoUrl(store, user, m[1], m[2]);
       } else out = { status: 404, body: { error: 'not_found' } };
     }

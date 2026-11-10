@@ -27,6 +27,6 @@ Start the emulators first for the rules tests (in `backend/`):
 
 ## Manual test checklist (from the project description, section 23)
 Use docs/DEMO_GUIDE.md. App-side items: application cancel button, manual SOS, company notification, health information display,
-front/rear video playback (needs uploaded clips: `seed_demo.js --video front.mp4 --rear-video rear.mp4`), location on map,
+video playback (needs an uploaded clip: `seed_demo.js --video front.mp4`), location on map,
 network loss (airplane mode: Firestore queues writes and syncs when back online).
-Hardware items (cameras, MPU-6050, SIM7600 SMS, GNSS, battery) are tested on the vest – see raspberry-pi/.
+Hardware items (front camera, MPU-6050, SIM7600 SMS, GNSS, battery) are tested on the vest – see raspberry-pi/.

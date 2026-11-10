@@ -111,5 +111,6 @@ test('video upload flow and authorized, audited playback', async () => {
   assert.equal(v.status, 200); assert.ok(v.body.url.startsWith('https://read.example/'));
   assert.equal(s.audits.at(-1).action, 'video_access');
   s.devices['vest-2'] = { deviceId: 'vest-2', riderId: 'r9', companyId: 'B', secretHash: H.sha('k2') };
-  assert.equal((await dev(s, 'upload_url', { incident_id: 'INC-ABC123', side: 'rear' }, hdr('k2', 'vest-2'))).status, 404);
+  assert.equal((await dev(s, 'upload_url', { incident_id: 'INC-ABC123', side: 'front' }, hdr('k2', 'vest-2'))).status, 404);
+  assert.equal((await dev(s, 'upload_url', { incident_id: 'INC-ABC123', side: 'rear' })).status, 400);   // single front camera only
 });

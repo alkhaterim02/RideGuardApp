@@ -17,7 +17,7 @@ import com.rideguard.app.model.UserDoc;
 import java.util.Locale;
 
 /**
- * Incident details. Rider (13.9): map, sensor summary, videos, deletion request.
+ * Incident details. Rider (13.9): map, sensor summary, video, deletion request.
  * Company (14.4): plus rider/contact/health (active emergencies only, audited), call buttons, acknowledge and close.
  */
 public class IncidentDetailActivity extends BaseActivity {
@@ -44,8 +44,7 @@ public class IncidentDetailActivity extends BaseActivity {
         b.callRiderBtn.setOnClickListener(v -> Ui.dial(this, riderPhone));
         b.callContactBtn.setOnClickListener(v -> Ui.dial(this, snapshot == null ? null : snapshot.getString("emergencyContactPhone")));
         b.directionsBtn.setOnClickListener(v -> { if (inc != null && inc.hasLocation()) Ui.directions(this, inc.latitude, inc.longitude); });
-        b.frontBtn.setOnClickListener(v -> play("front"));
-        b.rearBtn.setOnClickListener(v -> play("rear"));
+        b.frontBtn.setOnClickListener(v -> play());
         b.deleteBtn.setOnClickListener(v -> new MaterialAlertDialogBuilder(this)
                 .setTitle("Request deletion?")
                 .setMessage("Your company will be asked to delete this record and its videos, as allowed by its privacy policy and the law.")
@@ -159,23 +158,21 @@ public class IncidentDetailActivity extends BaseActivity {
                 inc.tiltDeg == null ? "—" : String.format(Locale.US, "%.0f°", inc.tiltDeg),
                 inc.aiVerificationScore == null ? "not available" : String.format(Locale.US, "%.0f%% likely accident", inc.aiVerificationScore * 100)));
 
-        // Videos
+        // Video (the vest has a single front camera)
         b.frontStatus.setText("Front camera: " + Labels.video(inc.frontVideoUploadStatus));
-        b.rearStatus.setText("Rear camera: " + Labels.video(inc.rearVideoUploadStatus));
         b.frontBtn.setVisibility("uploaded".equals(inc.frontVideoUploadStatus) && inc.frontVideoPath != null ? View.VISIBLE : View.GONE);
-        b.rearBtn.setVisibility("uploaded".equals(inc.rearVideoUploadStatus) && inc.rearVideoPath != null ? View.VISIBLE : View.GONE);
 
         b.deleteBtn.setVisibility(!staff && !inc.isActive() && !inc.deletionRequested ? View.VISIBLE : View.GONE);
     }
 
     private static String nz(String s) { return s == null || s.isEmpty() ? "—" : s; }
 
-    private void play(String side) {
-        String path = "front".equals(side) ? inc.frontVideoPath : inc.rearVideoPath;
+    private void play() {
+        String path = inc.frontVideoPath;
         if (path == null) return;
-        Repo.audit(me, "video_access", id, inc.riderId, side, null);
+        Repo.audit(me, "video_access", id, inc.riderId, "front", null);
         startActivity(new Intent(this, VideoActivity.class).putExtra(VideoActivity.EXTRA_PATH, path)
-                .putExtra(VideoActivity.EXTRA_TITLE, ("front".equals(side) ? "Front" : "Rear") + " video – " + id)
+                .putExtra(VideoActivity.EXTRA_TITLE, "Accident video – " + id)
                 .putExtra(VideoActivity.EXTRA_ALLOW_SAVE, !me.isStaff()));
     }
 

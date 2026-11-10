@@ -28,8 +28,8 @@ export async function loadSnapshot(incidentId: string, me: UserDoc): Promise<Eme
 }
 
 /** Downloads through the SDK (Storage rules are checked) rather than a shareable download URL. */
-export async function loadVideo(path: string, incidentId: string, side: 'front' | 'rear', me: UserDoc): Promise<string> {
-  await audit(me, 'video_access', { incidentId, side });
+export async function loadVideo(path: string, incidentId: string, me: UserDoc): Promise<string> {
+  await audit(me, 'video_access', { incidentId, side: 'front' });
   const blob = await getBlob(ref(storage, path));
   return URL.createObjectURL(blob);
 }

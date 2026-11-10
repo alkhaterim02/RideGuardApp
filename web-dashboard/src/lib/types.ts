@@ -32,7 +32,6 @@ export interface DeviceStatus {
   battery?: number;
   imu?: string;
   frontCamera?: string;
-  rearCamera?: string;
   lte?: string;
   gnss?: string;
   state?: string;
@@ -76,9 +75,7 @@ export interface Incident {
   smsStatus?: string;
   companyNotified?: string;
   frontVideoUploadStatus?: VideoStatus;
-  rearVideoUploadStatus?: VideoStatus;
   frontVideoPath?: string;
-  rearVideoPath?: string;
   cancelRequested?: boolean;
   falseAlarmRequested?: boolean;
   deletionRequested?: boolean;

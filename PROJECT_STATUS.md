@@ -1,4 +1,4 @@
-# RideGuard AI – Project Status
+# RideGuard – Project Status
 
 _Last updated: 2026-10-21_
 
@@ -18,7 +18,7 @@ Scope agreed: **Android app + web dashboard on Firebase** (Auth, Firestore, Stor
 ## Not done / needs you
 - **Your Firebase project**: create it, add `google-services.json` and `web-dashboard/.env.local`, deploy rules, run `create_company.js` (docs/FIREBASE_SETUP.md). Nothing has been run against a real project yet.
 - **Blaze plan** for Cloud Functions (vest API, push notifications). Without it: no vest connection and no push when the app is closed.
-- Video playback was not exercised end to end (no sample MP4s); use `seed_demo.js --video front.mp4 --rear-video rear.mp4`.
+- Video playback was not exercised end to end (no sample MP4s); use `seed_demo.js --video front.mp4`.
 - Not tested on a physical phone, rider registration and health-profile screens not clicked through on the emulator (their writes are covered by the rules tests).
 - Login by phone number / rider ID (13.2) not supported (see docs/ANDROID_SETUP.md).
 - Vest hardware work from before is unchanged: real camera capture, `main.py` loop, hardware wiring docs.

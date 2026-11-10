@@ -27,8 +27,8 @@ export function Layout() {
     <div className="shell">
       <aside className={`side ${menu ? 'open' : ''}`}>
         <div className="brand">
-          <img src="/favicon.svg" alt="" width={30} height={30} />
-          <div><strong>RideGuard AI</strong><small>{company?.name || 'Company dashboard'}</small></div>
+          <img src="/logo.png" alt="" width={36} height={36} />
+          <div><strong>RideGuard</strong><small>{company?.name || 'Company dashboard'}</small></div>
         </div>
         <nav>
           {link('/', 'Overview')}

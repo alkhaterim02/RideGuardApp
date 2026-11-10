@@ -34,8 +34,8 @@ export function Login() {
     <div className="login-page">
       <form className="login-card" onSubmit={submit}>
         <div className="brand big">
-          <img src="/favicon.svg" alt="" width={44} height={44} />
-          <div><strong>RideGuard AI</strong><small>Company emergency dashboard</small></div>
+          <img src="/logo.png" alt="" width={64} height={64} />
+          <div><strong>RideGuard</strong><small>Company emergency dashboard</small></div>
         </div>
         {user && blocked && (
           <Notice tone="error">{blocked} <button type="button" className="linkish" onClick={() => logout()}>Sign out</button></Notice>

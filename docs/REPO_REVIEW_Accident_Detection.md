@@ -30,7 +30,7 @@ Reviewed commit `df1bcf6` (single "Initial commit", 2025-12-10). Cloned into an 
 - One-shot: stops after the first detection. No countdown, cancel, SOS, camera, Firebase, auth, history, dashboard, or Android.
 - Security: only a placeholder phone number and no secrets, but it also has no input validation.
 
-## 5. Compatibility with the RideGuard AI spec
+## 5. Compatibility with the RideGuard spec
 | Spec feature | In repo? | Verdict |
 |---|---|---|
 | MPU-6050 reading | Partly, buggy | Rebuilt |

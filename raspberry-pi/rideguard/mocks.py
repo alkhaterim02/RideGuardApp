@@ -31,5 +31,5 @@ class MockCameras:
         if self.fail: raise RuntimeError("simulated camera failure")
     def finish(self, incident_id):
         if self.fail: raise RuntimeError("simulated camera failure")
-        return {"front": f"/tmp/{incident_id}_front.mp4", "rear": f"/tmp/{incident_id}_rear.mp4"}
+        return {"front": f"/tmp/{incident_id}_front.mp4"}
     def discard(self, incident_id): self.discarded.append(incident_id)

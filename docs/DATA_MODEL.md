@@ -30,7 +30,7 @@ Users can change only their own name/phone. Staff change riders' `status`, `devi
 emergencyContactName, emergencyContactRelationship, emergencyContactPhone, consentEmergencySharing, consentAt`.
 Companies never read this collection directly.
 
-**devices/{deviceId}** – a vest: `companyId, riderId, label, active, lastSeenAt, status{battery, imu, frontCamera, rearCamera, lte, gnss, state}, secretHash`.
+**devices/{deviceId}** – a vest: `companyId, riderId, label, active, lastSeenAt, status{battery, imu, frontCamera, lte, gnss, state}, secretHash`.
 `status`/`lastSeenAt` come from the vest heartbeat (Cloud Functions). Online = seen in the last 2 minutes.
 
 **incidents/{INC-XXXXXXXX}**
@@ -49,8 +49,8 @@ Companies never read this collection directly.
 | `peakAccelG, peakRotationDps, tiltDeg, aiVerificationScore, aiAssessment` | sensor/AI summary |
 | `smsStatus` | `pending, accepted, delivered, failed, not_sent, simulated, no_vest` |
 | `companyNotified` | `dashboard, push_sent, push_failed, not_needed` |
-| `frontVideoUploadStatus, rearVideoUploadStatus` | `pending, uploading, uploaded, failed, none` |
-| `frontVideoPath, rearVideoPath` | Storage paths, set by the vest upload flow |
+| `frontVideoUploadStatus` | `pending, uploading, uploaded, failed, none` |
+| `frontVideoPath` | Storage path, set by the vest upload flow |
 | `cancelRequested` | rider asked the vest to cancel (vest decides on next heartbeat) |
 | `falseAlarmRequested` | rider reported a false alarm after the alert was sent |
 | `deletionRequested` | rider asked for a finished incident to be deleted |
@@ -71,7 +71,7 @@ Staff append entries as themselves; only admins read them (dashboard → Access 
 
 ## Storage
 
-`incidents/{companyId}/{riderId}/{incidentId}/{front|rear}_accident_video.mp4` – readable by the rider and by active staff
+`incidents/{companyId}/{riderId}/{incidentId}/front_accident_video.mp4` – readable by the rider and by active staff
 of that company; nobody writes from a client (the vest uses signed upload URLs from Cloud Functions).
 
 ## Indexes

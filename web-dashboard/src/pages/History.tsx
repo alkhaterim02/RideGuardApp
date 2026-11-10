@@ -21,9 +21,9 @@ export function History() {
     && (!q.trim() || `${i.incidentId} ${i.riderName}`.toLowerCase().includes(q.trim().toLowerCase()))), [incidents, status, rider, q, sim]);
 
   const exportCsv = () => {
-    const head = ['incident', 'rider', 'created', 'status', 'trigger', 'simulated', 'latitude', 'longitude', 'sms', 'front_video', 'rear_video', 'outcome', 'note'];
+    const head = ['incident', 'rider', 'created', 'status', 'trigger', 'simulated', 'latitude', 'longitude', 'sms', 'video', 'outcome', 'note'];
     const lines = rows.map((i) => [i.incidentId, i.riderName, i.createdAt?.toDate().toISOString(), i.status, i.trigger, i.simulated ? 'yes' : 'no',
-      i.latitude, i.longitude, i.smsStatus, i.frontVideoUploadStatus, i.rearVideoUploadStatus, i.outcome, i.closeNote].map(csvCell).join(','));
+      i.latitude, i.longitude, i.smsStatus, i.frontVideoUploadStatus, i.outcome, i.closeNote].map(csvCell).join(','));
     const url = URL.createObjectURL(new Blob([[head.join(','), ...lines].join('\n')], { type: 'text/csv' }));
     const a = document.createElement('a'); a.href = url; a.download = `rideguard-incidents-${new Date().toISOString().slice(0, 10)}.csv`; a.click();
     URL.revokeObjectURL(url);
@@ -51,7 +51,6 @@ export function History() {
             <tbody>
               {rows.map((i) => {
                 const sms = smsLabel(i.smsStatus);
-                const vids = [i.frontVideoUploadStatus, i.rearVideoUploadStatus].filter((v) => v === 'uploaded').length;
                 return (
                   <tr key={i.id} className="clickable" onClick={() => nav(`/incidents/${i.id}`)}>
                     <td>{dateTime(i.createdAt)}<div className="muted small">{i.incidentId}</div></td>
@@ -59,7 +58,7 @@ export function History() {
                     <td><StatusBadge status={i.status} /> <SimBadge show={i.simulated} /></td>
                     <td className="small">{i.latitude != null ? `${i.latitude.toFixed(4)}, ${i.longitude?.toFixed(4)}` : '—'}</td>
                     <td><Badge tone={sms.tone}>{sms.text}</Badge></td>
-                    <td className="small">{vids === 2 ? '2 videos' : vids === 1 ? '1 video' : 'None'}</td>
+                    <td className="small">{i.frontVideoUploadStatus === 'uploaded' ? 'Ready' : 'None'}</td>
                     <td className="small">{i.outcome ? OUTCOMES[i.outcome] : i.status === 'cancelled' ? 'False alarm (cancelled)' : '—'}</td>
                   </tr>
                 );
